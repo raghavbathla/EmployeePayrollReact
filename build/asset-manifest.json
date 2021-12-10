@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8c51080e.chunk.css",
+    "main.js": "/static/js/main.320e4f8f.chunk.js",
+    "main.js.map": "/static/js/main.320e4f8f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.48810588.js",
+    "runtime-main.js.map": "/static/js/runtime-main.48810588.js.map",
+    "static/css/2.383c0125.chunk.css": "/static/css/2.383c0125.chunk.css",
+    "static/js/2.99951b8b.chunk.js": "/static/js/2.99951b8b.chunk.js",
+    "static/js/2.99951b8b.chunk.js.map": "/static/js/2.99951b8b.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.383c0125.chunk.css.map": "/static/css/2.383c0125.chunk.css.map",
+    "static/css/main.8c51080e.chunk.css.map": "/static/css/main.8c51080e.chunk.css.map",
+    "static/js/2.99951b8b.chunk.js.LICENSE.txt": "/static/js/2.99951b8b.chunk.js.LICENSE.txt",
+    "static/media/add-24px.547c0879.svg": "/static/media/add-24px.547c0879.svg",
+    "static/media/create-black-18dp.6e44fe2b.svg": "/static/media/create-black-18dp.6e44fe2b.svg",
+    "static/media/delete-black-18dp.53c8228b.svg": "/static/media/delete-black-18dp.53c8228b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.48810588.js",
+    "static/css/2.383c0125.chunk.css",
+    "static/js/2.99951b8b.chunk.js",
+    "static/css/main.8c51080e.chunk.css",
+    "static/js/main.320e4f8f.chunk.js"
+  ]
+}
