@@ -1,13 +1,33 @@
 import React from "react";
 import "./Display.css";
+import  {useState,useEffect} from 'react';
+import { getUsers,deleteUser} from "../../Service/api";
 import deleteIcon from "../../Assets/icons/delete-black-18dp.svg";
 import editIcon from "../../Assets/icons/create-black-18dp.svg";
 import profile1 from "../../Assets/profile-images/Ellipse -3.png";
 import profile2 from "../../Assets/profile-images/Ellipse -1.png";
 import profile3 from "../../Assets/profile-images/Ellipse -2.png";
 import profile4 from "../../Assets/profile-images/Ellipse -4.png";
+import { Link } from 'react-router-dom';
 
 const Display = (props) => {
+
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
+    getAllUsers();
+}, []);
+
+const getAllUsers = async() => {
+  const response = await getUsers();
+  console.log(response.data);
+  setUsers(response.data);
+}
+const deleteUserData = async (id) => {
+  await deleteUser(id);
+  getAllUsers();
+}
+
    
     let employeeList = JSON.parse(localStorage.getItem('EmployeeList'));
     console.log(employeeList);
@@ -27,18 +47,18 @@ const Display = (props) => {
           </tr>
           </thead>
           <tbody>
-          {props.employeeList &&
-            props.employeeList.map((element, id) => (
-              <tr key={id}>
+          {
+            users.map(user => (
+              <tr key={user.id}>
                 <td><img className="profile" 
                 src={
-                  element.profilePic ===
+                  user.profilePic ===
                   "../../assets/profile-images/Ellipse -3.png"
                     ? profile1
-                    : element.profilePic ===
+                    : user.profilePic ===
                       "../../assets/profile-images/Ellipse -1.png"
                     ? profile2
-                    : element.profilePic ===
+                    : user.profilePic ===
                       "../../assets/profile-images/Ellipse -4.png"
                     ? profile3
                     : profile4
@@ -46,19 +66,22 @@ const Display = (props) => {
                 alt=""
               />
                 </td>
-                <td>{element.name}</td>
-                <td className="gender">{element.gender}</td>
+                <td>{user.name}</td>
+                <td className="gender">{user.gender}</td>
                 <td>
-                  {element.departments &&
-                    element.departments.map((dept) => (
+                  {user.department &&
+                    user.department.map(dept => (
                       <div className="dept-label">{dept}</div>
                     ))}
                 </td>
-                <td> ₹ {element.salary}</td>
-                <td>{element.startDate}</td>
+                <td> ₹ {user.salary}</td>
+                <td>{user.startDate}</td>
                 <td>
-                  <img src={deleteIcon} alt="delete"/>
-                  <img  src={editIcon} alt="edit" />
+                  <img src={deleteIcon} alt="delete" onClick={() => deleteUserData(user.id)}/>
+                  <Link to={`/edit/${user.id}`}>
+                  <img  src={editIcon} alt="edit"  />
+                  </Link>
+                  
                 </td>
               </tr>
             ))}

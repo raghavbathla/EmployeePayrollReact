@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './PayrollHome.css';
-import logo from './logo.png';
-import addImage from './add-24px.svg';
+import logo from  "../../Assets/images/logo.png";
+import addImage from "../../Assets/icons/add-24px.svg";
 import { Link } from "react-router-dom";
-// import searchIcon from "../../Assets/icons/search-black-18dp.svg";
+
 import Display from './DisplayForm';
 
 export class PayrollHome extends Component {
@@ -36,9 +36,7 @@ export class PayrollHome extends Component {
                                 <img className="search-icon" src={searchIcon} alt="" />
                                 </div> */}
                             <Link className="add-btn" to="/addemployee">
-                               
-                                    <img src={addImage} alt="Add user" />
-                               
+    <img src={addImage} alt="Add user" />   
                                 <div>Add User</div></Link>
                             
                         </div>

@@ -4,9 +4,9 @@ import profile2 from '../../Assets/profile-images/Ellipse -1.png';
 import profile3 from '../../Assets/profile-images/Ellipse -8.png';
 import profile4 from '../../Assets/profile-images/Ellipse -7.png';
 import './PayrollForm.css';
-import { addUser} from "../../Service/api";
+import { edituser,getUsers} from "../../Service/api";
 import logo from '../../Assets/images/logo.png'
-import {Link} from 'react-router-dom';
+import {Link,useParams} from 'react-router-dom';
 
 const initialValue =   {
     "name": '',
@@ -18,13 +18,21 @@ const initialValue =   {
     "profilePic": ''
   }
 
-const EmployeePayroll = (props) => {
+const EditUser = (props) => {
 
     const [user, setUser] = useState(initialValue);
-    const [date, setDate] = useState([]);
-
     const { name, gender, department, salary, startDate, note, profilePic } = user;
-   
+    const { id } = useParams();
+
+    useEffect(() => {
+        loadUserDetails();
+    }, []);
+
+    const loadUserDetails = async() => {
+        const response = await getUsers(id);
+        setUser(response.data);
+        console.log(response.data);
+    }
     let employeeList = {
         name: '',
         profileArray: [
@@ -76,9 +84,8 @@ const EmployeePayroll = (props) => {
         setForm({ ...formValue, [event.target.name]: event.target.value })
         console.log(event.target.value)
     }
-    const addUserDetails = async() => {
-        await addUser(user);
-        
+    const editUserDetails = async() => {
+        const response = await edituser(id, user);
     }
 
     const onCheckChange = (name) => {
@@ -141,7 +148,7 @@ const EmployeePayroll = (props) => {
             </header>
             <div className="form-content">
                 <form className="form-head" action="#" onSubmit={save}>
-                    <div className="form-head">Employee Payroll form</div>
+                    <div className="form-head">Edit  Employee Payroll form</div>
                     <div className="row-content">
                         <label className="label text" htmlFor="name">Name</label>
                         <input className="input" type="text" id="name" name='name' value={formValue.name} onChange={(event) => changeValue(event) } placeholder="Your name.." />
@@ -279,7 +286,7 @@ const EmployeePayroll = (props) => {
 
                         <div className="submit-reset">
                         
-                            <button type="submit" onClick={() => addUserDetails()}className="button submitButton" id="submitButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
+                            <button type="submit" onClick={() => editUserDetails()}className="button submitButton" id="submitButton">{formValue.isUpdate ? 'Update' : 'Submit'}</button>
                             <button type="button" onClick={reset} className="resetButton button">Reset</button>
                         </div>
                     </div >
@@ -288,4 +295,4 @@ const EmployeePayroll = (props) => {
         </div >
     );
 }                     
-export default EmployeePayroll;
+export default EditUser;

@@ -1,21 +1,9 @@
 {
   "EmployeePayrollDB": [
     {
-      "id": 1,
-      "name": "Mark",
-      "gender": "male",
-      "department": [
-        "Finance"
-      ],
-      "salary": "500000",
-      "startDate":"29 Oct 2019",
-      "note": "All In One",
-      "profilePic": "../Assets/profile-images/Ellipse -3.png"
-    },
-    {
       "id": 2,
-      "name": "Bill",
-      "gender": "male",
+      "name": "billi",
+      "gender": "female",
       "department": [
         "Engineering"
       ],
@@ -48,6 +36,18 @@
       "note": "                ",
       "startDate": 1621189800000,
       "id": 5
+    },
+    {
+      "name": "Raghav Bathla",
+      "gender": "male",
+      "department": [
+        "HR"
+      ],
+      "salary": "78678",
+      "startDate": "",
+      "notes": "",
+      "profilePic": "../../assets/profile-images/Ellipse -3.png",
+      "id": 6
     }
   ]
 }
