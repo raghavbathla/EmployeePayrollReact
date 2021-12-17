@@ -49,7 +49,7 @@ const deleteUserData = async (id) => {
           <tbody>
           {
             users.map(user => (
-              <tr key={user.id}>
+              <tr key={user.employeeId}>
                 <td><img className="profile" 
                 src={
                   user.profilePic ===
@@ -69,16 +69,16 @@ const deleteUserData = async (id) => {
                 <td>{user.name}</td>
                 <td className="gender">{user.gender}</td>
                 <td>
-                  {user.department &&
-                    user.department.map(dept => (
+                  {user.departments &&
+                    user.departments.map(dept => (
                       <div className="dept-label">{dept}</div>
                     ))}
                 </td>
                 <td> ₹ {user.salary}</td>
                 <td>{user.startDate}</td>
                 <td>
-                  <img src={deleteIcon} alt="delete" onClick={() => deleteUserData(user.id)}/>
-                  <Link to={`/edit/${user.id}`}>
+                  <img src={deleteIcon} alt="delete" onClick={() => deleteUserData(user.employeeId)}/>
+                  <Link to={`/edit/${user.employeeId}`}>
                   <img  src={editIcon} alt="edit"  />
                   </Link>
                   

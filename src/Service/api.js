@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const usersUrl = 'http://localhost:3003/EmployeePayrollDB';
-
+//const usersUrl = 'http://localhost:3003/EmployeePayrollDB';
+const usersUrl='http://localhost:8084/employeepayroll'
 
 export const getUsers = async (id) => {
     id = id || '';
-    return await axios.get(`${usersUrl}/${id}`);
+    return await axios.get(`${usersUrl}/get/${id}`);
 }
 export const addUser = async (user) => {
-    return await axios.post(usersUrl, user);
+    return await axios.post(`${usersUrl}/create`, user);
 }
 export const deleteUser = async (id) => {
-    return await axios.delete(`${usersUrl}/${id}`);
+    return await axios.delete(`${usersUrl}/delete/${id}`);
 }
 export const edituser = async (id, user) => {
-    return await axios.put(`${usersUrl}/${id}`, user)
+    return await axios.put(`${usersUrl}/update/1`, user)
 }

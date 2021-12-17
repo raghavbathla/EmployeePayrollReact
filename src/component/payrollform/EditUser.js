@@ -11,25 +11,25 @@ import {Link,useParams} from 'react-router-dom';
 const initialValue =   {
     "name": '',
     "gender": '',
-    "department": [],
+    "departments": [],
     "salary": '',
-    "startDate":'',
+    "start_date":'',
     "notes": '',
-    "profilePic": ''
+    "profile_Pic": ''
   }
 
 const EditUser = (props) => {
 
     const [user, setUser] = useState(initialValue);
-    const { name, gender, department, salary, startDate, note, profilePic } = user;
-    const { id } = useParams();
+    const { name, gender, departments, salary, start_date, note, profile_Pic } = user;
+    const { employeeId } = useParams();
 
     useEffect(() => {
         loadUserDetails();
     }, []);
 
     const loadUserDetails = async() => {
-        const response = await getUsers(id);
+        const response = await getUsers(employeeId);
         setUser(response.data);
         console.log(response.data);
     }
@@ -85,7 +85,8 @@ const EditUser = (props) => {
         console.log(event.target.value)
     }
     const editUserDetails = async() => {
-        const response = await edituser(id, user);
+        const response = await edituser(employeeId, user);
+        console.log(response.data)
     }
 
     const onCheckChange = (name) => {

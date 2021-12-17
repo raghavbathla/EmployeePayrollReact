@@ -11,11 +11,11 @@ import {Link} from 'react-router-dom';
 const initialValue =   {
     "name": '',
     "gender": '',
-    "department": [],
+    "departments": [],
     "salary": '',
-    "startDate":'',
+    "start_date":'',
     "notes": '',
-    "profilePic": ''
+    "profile_Pic": ''
   }
 
 const EmployeePayroll = (props) => {
@@ -23,7 +23,7 @@ const EmployeePayroll = (props) => {
     const [user, setUser] = useState(initialValue);
     const [date, setDate] = useState([]);
 
-    const { name, gender, department, salary, startDate, note, profilePic } = user;
+    const { name, gender, departments, salary, start_date, note, profile_Pic } = user;
    
     let employeeList = {
         name: '',
