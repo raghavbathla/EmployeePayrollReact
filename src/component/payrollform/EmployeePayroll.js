@@ -8,14 +8,16 @@ import { addUser} from "../../Service/api";
 import logo from '../../Assets/images/logo.png'
 import {Link} from 'react-router-dom';
 
+
+
 const initialValue =   {
     "name": '',
     "gender": '',
     "departments": [],
     "salary": '',
-    "start_date":'',
+    "startDate":'',
     "notes": '',
-    "profile_Pic": ''
+    "profilePic": ''
   }
 
 const EmployeePayroll = (props) => {
@@ -23,7 +25,7 @@ const EmployeePayroll = (props) => {
     const [user, setUser] = useState(initialValue);
     const [date, setDate] = useState([]);
 
-    const { name, gender, departments, salary, start_date, note, profile_Pic } = user;
+    const { name, gender, departments, salary, startDate, note, profilePic } = user;
    
     let employeeList = {
         name: '',
@@ -44,6 +46,7 @@ const EmployeePayroll = (props) => {
         month: '',
         year: '',
         startDate: '',
+    
         notes: '',
         id: '',
         profilePic: '',
@@ -60,7 +63,6 @@ const EmployeePayroll = (props) => {
     const [formValue, setForm] = useState(employeeList);
 
 
-
     // useEffect(() => {
     //     const retriveContacts = JSON.parse(localStorage.getItem('EmployeeList'));
     //     if (retriveContacts) setForm(retriveContacts);
@@ -72,12 +74,16 @@ const EmployeePayroll = (props) => {
 
 
     const changeValue = (event) => {
-        setUser({...user, [event.target.name]: event.target.value})
+
         setForm({ ...formValue, [event.target.name]: event.target.value })
-        console.log(event.target.value)
+        setUser({...user, [event.target.name]: event.target.value})
+    
+       
+  
     }
     const addUserDetails = async() => {
         await addUser(user);
+        console.log(formValue.startDate)
         
     }
 
@@ -90,7 +96,7 @@ const EmployeePayroll = (props) => {
         else
             checkArray.push(name);
         setForm({ ...formValue, departMentValue: checkArray });
-        setUser({...user, department: checkArray})
+        setUser({...user, departments: checkArray})
     }
 
     const getChecked = (name) => {
@@ -125,7 +131,7 @@ const EmployeePayroll = (props) => {
     const reset = () => {
         setForm({ ...employeeList, id: formValue.id, isUpdate: formValue.isUpdate });
 
-        console.log(formValue);
+     
     }
 
     return (
@@ -204,7 +210,7 @@ const EmployeePayroll = (props) => {
                     <div className="row-content">
                         <label className="label text" htmlFor="startDate">Start Date</label>
                         <div>
-                            <select value={formValue.day} onChange={(event) => changeValue(event)} id="day" name="day">
+                            <select  onChange={(event) => setDate(event)} id='day' name='date'>
                             <option value="" disabled selected>Day</option>
                                 <option value="01">1</option>
                                 <option value="02">2</option>
@@ -238,7 +244,7 @@ const EmployeePayroll = (props) => {
                                 <option value="30">30</option>
                                 <option value="31">31</option>
                             </select>
-                            <select value={formValue.month} onChange={(event) => changeValue(event)} id="month" name="month">
+                            <select   id='month' name='month'>
                             <option value="" disabled selected>Month</option>
                                 <option value="Jan">January</option>
                                 <option value="Feb">Febuary</option>
@@ -253,7 +259,7 @@ const EmployeePayroll = (props) => {
                                 <option value="Nov">November</option>
                                 <option value="Dec">December</option>
                             </select>
-                            <select value={formValue.year} onChange={(event) => changeValue(event)} id="year" name="year">
+                            <select  id='year' name='year'>
                             <option value="" disabled selected>Year</option>
                                 <option value="2021">2021</option>
                                 <option value="2020">2020</option>

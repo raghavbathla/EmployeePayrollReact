@@ -6,30 +6,31 @@ import profile4 from '../../Assets/profile-images/Ellipse -7.png';
 import './PayrollForm.css';
 import { edituser,getUsers} from "../../Service/api";
 import logo from '../../Assets/images/logo.png'
-import {Link,useParams} from 'react-router-dom';
+import {Link,useParams,useNavigate} from 'react-router-dom';
 
 const initialValue =   {
     "name": '',
     "gender": '',
     "departments": [],
     "salary": '',
-    "start_date":'',
-    "notes": '',
-    "profile_Pic": ''
+    "startdate":'',
+    "note": '',
+    "profilePic": ''
   }
 
 const EditUser = (props) => {
 
     const [user, setUser] = useState(initialValue);
-    const { name, gender, departments, salary, start_date, note, profile_Pic } = user;
-    const { employeeId } = useParams();
-
+    const { name, gender, departments, salary, startdate, note, profilePic } = user;
+    const { id } = useParams();
+    let history = useNavigate();
     useEffect(() => {
         loadUserDetails();
     }, []);
 
     const loadUserDetails = async() => {
-        const response = await getUsers(employeeId);
+        const response = await getUsers(id);
+        console.log(id)
         setUser(response.data);
         console.log(response.data);
     }
@@ -80,13 +81,16 @@ const EditUser = (props) => {
 
 
     const changeValue = (event) => {
-        setUser({...user, [event.target.name]: event.target.value})
+        
         setForm({ ...formValue, [event.target.name]: event.target.value })
+        setUser({...user, [event.target.name]: event.target.value})
+        
         console.log(event.target.value)
     }
     const editUserDetails = async() => {
-        const response = await edituser(employeeId, user);
+        const response = await edituser(id, user);
         console.log(response.data)
+        history("/")
     }
 
     const onCheckChange = (name) => {
@@ -98,7 +102,7 @@ const EditUser = (props) => {
         else
             checkArray.push(name);
         setForm({ ...formValue, departMentValue: checkArray });
-        setUser({...user, department: checkArray})
+        setUser({...user, departments: checkArray})
     }
 
     const getChecked = (name) => {
@@ -152,7 +156,7 @@ const EditUser = (props) => {
                     <div className="form-head">Edit  Employee Payroll form</div>
                     <div className="row-content">
                         <label className="label text" htmlFor="name">Name</label>
-                        <input className="input" type="text" id="name" name='name' value={formValue.name} onChange={(event) => changeValue(event) } placeholder="Your name.." />
+                        <input className="input" type="text" id="name" name='name' value={name} onChange={(event) => changeValue(event) } placeholder="Your name.." />
                     {/* <error className="error">{formValue.error.name}</error> */}
                     </div>
                     <div className="row-content">
@@ -181,9 +185,9 @@ const EditUser = (props) => {
                     <div className="row-content">
                         <label className="label text" htmlFor="gender">Gender</label>
                         <div>
-                            <input type="radio" id="male" checked={formValue.gender === 'male'} onChange={(event) => changeValue(event)} name='gender' value="male" />
+                            <input type="radio" id="male" checked={gender === 'male'} onChange={(event) => changeValue(event)} name='gender' value="male" />
                             <label className="text" htmlFor="male">Male</label>
-                            <input type="radio" id="female" checked={formValue.gender === 'female'} onChange={(event) => changeValue(event)} name='gender' value="female" />
+                            <input type="radio" id="female" checked={gender === 'female'} onChange={(event) => changeValue(event)} name='gender' value="female" />
                             <label className="text" htmlFor="female">Female</label>
                         </div>
                         {/* <error className="error">{formValue.error.gender}</error> */}
@@ -205,7 +209,7 @@ const EditUser = (props) => {
 
                     <div className="row-content">
                         <label className="label text" htmlFor="salary">Salary</label>
-                        <input className="input" type="text" id="salary" name='salary' value={formValue.salary} onChange={(event) => changeValue(event)} />
+                        <input className="input" type="text" id="salary" name='salary' value={salary} onChange={(event) => changeValue(event)} />
                         {/* <error className="error">{formValue.error.salary}</error> */}
                     </div>
 
@@ -276,7 +280,7 @@ const EditUser = (props) => {
 
                     <div className="row-content">
                         <label className="label text" htmlFor="notes">Notes</label>
-                        <textarea onChange={(event) => changeValue(event)} id="notes" value={formValue.notes} className="input" name='notes' placeholder=""
+                        <textarea onChange={(event) => changeValue(event)} id="notes" value={note} className="input" name='notes' placeholder=""
                             style={{ height: '120%' }}></textarea>
                     {/* <error className="error">{formValue.error.notes}</error> */}
                     </div>
